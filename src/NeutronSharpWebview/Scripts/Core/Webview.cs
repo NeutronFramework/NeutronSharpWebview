@@ -236,42 +236,6 @@ After:
         return this;
     }
 
-    public Webview SetFullscreen(bool fullscreen)
-    {
-        nint windowPtr = Bindings.webview_get_window(nativeWebview);
-
-        if (OperatingSystem.IsWindows())
-        {
-            if (fullscreen)
-            {
-                WinAPI.ShowWindow(windowPtr, WinAPI.SW_MAXIMIZE);
-            }
-            else
-            {
-                WinAPI.ShowWindow(windowPtr, WinAPI.SW_RESTORE);
-            }
-        }
-        else if (OperatingSystem.IsLinux())
-        {
-            var window = new Window(windowPtr);
-            if (fullscreen)
-            {
-                window.Fullscreen();
-            }
-            else
-            {
-                window.Unfullscreen();
-            }
-        }
-        else
-        {
-            throw new NotSupportedException("Operating system not supported.");
-        }
-
-        return this;
-    }
-
-
     /// <summary>
     /// Runs the main loop of the webview. Should be used as the last statement.
     /// </summary>
