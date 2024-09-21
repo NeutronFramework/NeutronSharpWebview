@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>NeutronSharpWebview</AssemblyName>
+    <Authors>AnnasVirtual Gerrit 'Geaz' Gazic</Authors>
+    <Owners>AnnasVirtual Gerrit 'Geaz' Gazic</Owners>
+    <Description>Fork of https://github.com/webview/webview_csharp</Description>
+    <PackageId>NeutronSharpWebview</PackageId>
+    <PackageVersion>0.11.0</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/NeutronFramework/SharpWebview</PackageProjectUrl>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>/</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="libs/webview.dll">
+      <PackagePath>runtimes/win-x64/native/webview.dll</PackagePath>
+      <Pack>True</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+
+    <None Include="libs/WebView2Loader.dll">
+      <PackagePath>runtimes/win-x64/native/WebView2Loader.dll</PackagePath>
+      <Pack>True</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+
+    <None Include="libs/libwebview.dylib">
+      <PackagePath>runtimes/osx-x64/native/libwebview.dylib</PackagePath>
+      <Pack>True</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+
+    <None Include="libs/libwebview.so">
+      <PackagePath>runtimes/linux-x64/native/libwebview.so</PackagePath>
+      <Pack>True</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="GtkSharp" Version="3.24.24.95" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>
