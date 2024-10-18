@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 
-namespace NeutronSharpWebview.Scripts.Content;
+namespace NeutronSharpWebview.Content;
 
 public sealed class WebContent : IWebviewContent
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
 
-namespace NeutronSharpWebview.Scripts.Core;
+namespace NeutronSharpWebview.Core;
 
 /// <summary>
 /// This class includes all methods necessary to check for the loopback exception on windows.
@@ -41,7 +41,7 @@ public class Loopback
     private List<FirewallAppContainer> GetAllAppContainers()
     {
         uint size = 0;
-        IntPtr arrayValue = IntPtr.Zero;
+        nint arrayValue = nint.Zero;
         int structSize = Marshal.SizeOf<FirewallAppContainer>();
 
         FirewallAPI.NetworkIsolationEnumAppContainers((uint)NETISO_FLAG.NETISO_FLAG_MAX, ref size, ref arrayValue);
@@ -51,7 +51,7 @@ public class Loopback
         {
             var cur = Marshal.PtrToStructure<FirewallAppContainer>(arrayValue);
             firewallApps.Add(cur);
-            arrayValue = IntPtr.Add(arrayValue, structSize);
+            arrayValue = nint.Add(arrayValue, structSize);
         }
 
         return firewallApps;
@@ -60,7 +60,7 @@ public class Loopback
     private List<SidAndAttributes> GetAllAppContainerConfigs()
     {
         uint size = 0;
-        IntPtr arrayValue = IntPtr.Zero;
+        nint arrayValue = nint.Zero;
         int structSize = Marshal.SizeOf<SidAndAttributes>();
 
         FirewallAPI.NetworkIsolationGetAppContainerConfig(ref size, ref arrayValue);
@@ -70,7 +70,7 @@ public class Loopback
         {
             var currentConfig = Marshal.PtrToStructure<SidAndAttributes>(arrayValue);
             firewallAppConfigs.Add(currentConfig);
-            arrayValue = IntPtr.Add(arrayValue, structSize);
+            arrayValue = nint.Add(arrayValue, structSize);
         }
 
         return firewallAppConfigs;
@@ -85,35 +85,35 @@ public class Loopback
     [StructLayout(LayoutKind.Sequential)]
     internal struct FirewallAppContainer
     {
-        internal IntPtr appContainerSid;
-        internal IntPtr userSid;
-        public IntPtr appContainerName;
-        public IntPtr displayName;
-        public IntPtr description;
+        internal nint appContainerSid;
+        internal nint userSid;
+        public nint appContainerName;
+        public nint displayName;
+        public nint description;
         internal FirewallAcCapabilities capabilities;
         internal FirewallAcBinaries binaries;
-        public IntPtr workingDirectory;
-        public IntPtr packageFullName;
+        public nint workingDirectory;
+        public nint packageFullName;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct FirewallAcCapabilities
     {
         public uint count;
-        public IntPtr capabilities;
+        public nint capabilities;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct FirewallAcBinaries
     {
         public uint count;
-        public IntPtr binaries;
+        public nint binaries;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     internal struct SidAndAttributes
     {
-        public IntPtr Sid;
+        public nint Sid;
         public uint Attributes;
     }
 }
@@ -121,15 +121,15 @@ public class Loopback
 internal static partial class FirewallAPI
 {
     [LibraryImport("FirewallAPI.dll")]
-    internal static partial uint NetworkIsolationEnumAppContainers(uint Flags, ref uint pdwCntPublicACs, ref IntPtr ppACs);
+    internal static partial uint NetworkIsolationEnumAppContainers(uint Flags, ref uint pdwCntPublicACs, ref nint ppACs);
 
     [LibraryImport("FirewallAPI.dll")]
-    internal static partial uint NetworkIsolationGetAppContainerConfig(ref uint pdwCntACs, ref IntPtr appContainerSids);
+    internal static partial uint NetworkIsolationGetAppContainerConfig(ref uint pdwCntACs, ref nint appContainerSids);
 
     [LibraryImport("advapi32", EntryPoint = "ConvertSidToStringSidW", StringMarshalling = StringMarshalling.Utf16)]
-    internal static partial int ConvertSidToStringSid(IntPtr pSid, out string strSid);
+    internal static partial int ConvertSidToStringSid(nint pSid, out string strSid);
 
-    internal static bool ConvertSidToStringSidWrapper(IntPtr pSid, out string strSid)
+    internal static bool ConvertSidToStringSidWrapper(nint pSid, out string strSid)
     {
         int result = ConvertSidToStringSid(pSid, out strSid);
         return result != 0;

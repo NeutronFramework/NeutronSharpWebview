@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace NeutronSharpWebview.Scripts.API;
+namespace NeutronSharpWebview.API;
 
 [StructLayout(LayoutKind.Sequential)]
 public struct Rect
@@ -37,8 +36,8 @@ public static partial class WinAPI
         public int Bottom;
     }
 
-    [DllImport("user32.dll", SetLastError = true)]
-    public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+    [LibraryImport("user32.dll", SetLastError = true)]
+    public static partial nint CallWindowProc(nint lpPrevWndFunc, nint hWnd, uint Msg, nint wParam, nint lParam);
 
     [LibraryImport("user32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]

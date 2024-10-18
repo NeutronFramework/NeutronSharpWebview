@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace NeutronSharpWebview.Scripts.Content;
+namespace NeutronSharpWebview.Content;
 
 public sealed class HtmlContent : IWebviewContent
 {

@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace NeutronSharpWebview.Scripts.Core;
+namespace NeutronSharpWebview.Core;
 
 public enum WebviewHint
 {

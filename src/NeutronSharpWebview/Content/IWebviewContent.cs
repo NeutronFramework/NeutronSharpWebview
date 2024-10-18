@@ -1,4 +1,4 @@
-namespace NeutronSharpWebview.Scripts.Content;
+namespace NeutronSharpWebview.Content;
 
 public interface IWebviewContent
 {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using Gtk;
 using Action = System.Action;
-using Rect = NeutronSharpWebview.Scripts.API.WinAPI.Rect;
-using WinAPI = NeutronSharpWebview.Scripts.API.WinAPI;
-using NeutronSharpWebview.Scripts.Content;
+using Rect = NeutronSharpWebview.API.WinAPI.Rect;
+using WinAPI = NeutronSharpWebview.API.WinAPI;
+using NeutronSharpWebview.Content;
 
-namespace NeutronSharpWebview.Scripts.Core;
+namespace NeutronSharpWebview.Core;
 
 /// <summary>
 /// A cross platform webview.
@@ -36,15 +36,6 @@ public class Webview : IDisposable
     /// </param>
     public Webview(bool debug = false, bool interceptExternalLinks = false)
     {
-
-/* Unmerged change from project 'SharpWebview (net6.0)'
-Before:
-        if(interceptExternalLinks)
-        {
-After:
-        if (interceptExternalLinks)
-        {
-*/
         nativeWebview = Bindings.webview_create(debug ? 1 : 0, nint.Zero);
         if (interceptExternalLinks)
         {
@@ -138,6 +129,11 @@ After:
         return this;
     }
 
+    /// <summary>
+    /// Center the webview application window
+    /// </summary>
+    /// <returns>The webview object for a fluent api.</returns>
+    /// <exception cref="NotSupportedException">Thrown when the operating system is not supported</exception>
     public Webview Center()
     {
         nint windowPtr = Bindings.webview_get_window(nativeWebview);
@@ -147,7 +143,7 @@ After:
             Rect rect;
 
             WinAPI.GetWindowRect(windowPtr, out rect);
-            
+
             int width = rect.Right - rect.Left;
             int height = rect.Bottom - rect.Top;
 
@@ -157,7 +153,7 @@ After:
             int x = (screenWidth - width) / 2;
             int y = (screenHeight - height) / 2;
 
-            WinAPI.SetWindowPos(windowPtr, IntPtr.Zero, x, y, 0, 0, WinAPI.SWP_NOSIZE | WinAPI.SWP_NOZORDER);
+            WinAPI.SetWindowPos(windowPtr, nint.Zero, x, y, 0, 0, WinAPI.SWP_NOSIZE | WinAPI.SWP_NOZORDER);
         }
         else if (OperatingSystem.IsLinux())
         {
@@ -173,6 +169,11 @@ After:
         return this;
     }
 
+    /// <summary>
+    /// Maximize the webview application window
+    /// </summary>
+    /// <returns>The webview object for a fluent api.</returns>
+    /// <exception cref="NotSupportedException">Thrown when the operating system is not supported</exception>
     public Webview Maximize()
     {
         nint windowPtr = Bindings.webview_get_window(nativeWebview);
@@ -194,6 +195,11 @@ After:
         return this;
     }
 
+    /// <summary>
+    /// Minimize the webview application window
+    /// </summary>
+    /// <returns>The webview object for a fluent api.</returns>
+    /// <exception cref="NotSupportedException">Thrown when the operating system is not supported</exception>
     public Webview Minimize()
     {
         nint windowPtr = Bindings.webview_get_window(nativeWebview);
@@ -215,6 +221,13 @@ After:
         return this;
     }
 
+    /// <summary>
+    /// Set the size of webview application window
+    /// </summary>
+    /// <param name="width">The width of the window</param>
+    /// <param name="height">The height of the window</param>
+    /// <returns>The webview object for a fluent api.</returns>
+    /// <exception cref="NotSupportedException">Thrown when the operating system is not supported</exception>
     public Webview SetSize(int width, int height)
     {
         nint windowPtr = Bindings.webview_get_window(nativeWebview);
@@ -375,9 +388,9 @@ After:
     {
         // https://docs.microsoft.com/de-de/windows/win32/sysinfo/operating-system-version
         if (Environment.OSVersion.Version.Major < 6 || Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor < 2)
-        { 
+        {
             return true;
-        }    
+        }
         else if (url.Contains("localhost") && !url.Contains("127.0.0.1"))
         {
             return null;
