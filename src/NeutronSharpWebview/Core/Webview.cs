@@ -8,6 +8,7 @@ using Action = System.Action;
 using Rect = NeutronSharpWebview.API.WinAPI.Rect;
 using WinAPI = NeutronSharpWebview.API.WinAPI;
 using NeutronSharpWebview.Content;
+using GtkWindow = Gtk.Window;
 
 namespace NeutronSharpWebview.Core;
 
@@ -157,9 +158,8 @@ public class Webview : IDisposable
         }
         else if (OperatingSystem.IsLinux())
         {
-            var window = new Window(windowPtr);
-
-            window.SetPosition(WindowPosition.Center);
+            GtkWindow gtkWindow = new(windowPtr);
+            gtkWindow.SetPosition(WindowPosition.Center);
         }
         else
         {
@@ -184,8 +184,8 @@ public class Webview : IDisposable
         }
         else if (OperatingSystem.IsLinux())
         {
-            var window = new Window(windowPtr);
-            window.Maximize();
+            GtkWindow gtkWindow = new(windowPtr);
+            gtkWindow.Maximize();
         }
         else
         {
@@ -210,8 +210,8 @@ public class Webview : IDisposable
         }
         else if (OperatingSystem.IsLinux())
         {
-            var window = new Window(windowPtr);
-            window.Iconify();
+            GtkWindow gtkWindow = new(windowPtr);
+            gtkWindow.Iconify();
         }
         else
         {
@@ -238,8 +238,8 @@ public class Webview : IDisposable
         }
         else if (OperatingSystem.IsLinux())
         {
-            var window = new Window(windowPtr);
-            window.SetDefaultSize(width, height);
+            GtkWindow gtkWindow = new(windowPtr);
+            gtkWindow.SetDefaultSize(width, height);
         }
         else
         {

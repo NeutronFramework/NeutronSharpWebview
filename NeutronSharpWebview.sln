@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeutronSharpWebview", "src\NeutronSharpWebview\NeutronSharpWebview.csproj", "{54092274-A572-412C-9FCD-0DD1CFA2E316}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "src\Test\Test.csproj", "{996F2236-D1A0-4718-896C-89621E25FED1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{54092274-A572-412C-9FCD-0DD1CFA2E316}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54092274-A572-412C-9FCD-0DD1CFA2E316}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54092274-A572-412C-9FCD-0DD1CFA2E316}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996F2236-D1A0-4718-896C-89621E25FED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996F2236-D1A0-4718-896C-89621E25FED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996F2236-D1A0-4718-896C-89621E25FED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996F2236-D1A0-4718-896C-89621E25FED1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

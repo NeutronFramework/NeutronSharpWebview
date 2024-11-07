@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NeutronSharpWebview\NeutronSharpWebview.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyDll" AfterTargets="AfterBuild">
+    <Copy SourceFiles="..\NeutronSharpWebview\libs\webview.dll" DestinationFolder="$(OutDir)" />
+  </Target>
+  <Target Name="CopyDll2" AfterTargets="CopyDll">
+    <Copy SourceFiles="..\NeutronSharpWebview\libs\WebView2Loader.dll" DestinationFolder="$(OutDir)" />
+  </Target>
+  <Target Name="CopyDyLib" AfterTargets="CopyDll2">
+    <Copy SourceFiles="..\NeutronSharpWebview\libs\libwebview.dylib" DestinationFolder="$(OutDir)" />
+  </Target>
+  <Target Name="CopySo" AfterTargets="CopyDyLib">
+    <Copy SourceFiles="..\NeutronSharpWebview\libs\libwebview.so" DestinationFolder="$(OutDir)" />
+  </Target>
+</Project>
