@@ -12,7 +12,7 @@ internal class Program
         {
             webview.SetTitle("Hello Webview");
             webview.SetSize(960, 540, WebviewHint.None);
-            webview.Fullscreen();
+            webview.Center();
             webview.Navigate(new UrlContent("https://annasvirtual.vercel.app"));
             webview.Run();
         }
