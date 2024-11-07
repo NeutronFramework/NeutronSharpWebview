@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using Action = System.Action;
-using Rect = NeutronSharpWebview.API.WinAPI.Rect;
 using WinAPI = NeutronSharpWebview.API.WinAPI;
 using NeutronSharpWebview.Content;
 using GtkWindow = Gtk.Window;
+using WindowsRect = NeutronSharpWebview.API.WinAPI.Rect;
 using Gtk;
 
 namespace NeutronSharpWebview.Core;
@@ -141,12 +141,12 @@ public class Webview : IDisposable
 
         if (OperatingSystem.IsWindows())
         {
-            Rect rect;
+            WindowsRect rect;
 
             WinAPI.GetWindowRect(windowPtr, out rect);
 
-            int width = rect.Right - rect.Left;
-            int height = rect.Bottom - rect.Top;
+            int width = rect.right - rect.left;
+            int height = rect.bottom - rect.top;
 
             int screenWidth = WinAPI.GetSystemMetrics(WinAPI.SM_CXSCREEN);
             int screenHeight = WinAPI.GetSystemMetrics(WinAPI.SM_CYSCREEN);
@@ -163,7 +163,7 @@ public class Webview : IDisposable
         }
         else
         {
-            throw new NotSupportedException("Operating system not supported.");
+            throw new NotSupportedException("Operating system is not supported.");
         }
 
         return this;
@@ -189,7 +189,7 @@ public class Webview : IDisposable
         }
         else
         {
-            throw new NotSupportedException("Operating system not supported.");
+            throw new NotSupportedException("Operating system is not supported.");
         }
 
         return this;
@@ -215,13 +215,13 @@ public class Webview : IDisposable
         }
         else
         {
-            throw new NotSupportedException("Operating system not supported.");
+            throw new NotSupportedException("Operating system is not supported.");
         }
 
         return this;
     }
 
-    /// <summary>gi
+    /// <summary>
     /// Set the size of webview application window
     /// </summary>
     /// <param name="width">The width of the window</param>
@@ -243,7 +243,7 @@ public class Webview : IDisposable
         }
         else
         {
-            throw new NotSupportedException("Operating system not supported.");
+            throw new NotSupportedException("Operating system is not supported.");
         }
 
         return this;
