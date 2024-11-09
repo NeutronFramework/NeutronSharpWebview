@@ -16,6 +16,5 @@ internal class Program
             webview.Navigate(new UrlContent("https://annasvirtual.vercel.app"));
             webview.Run();
         }
-
     }
 }
